@@ -12,5 +12,9 @@
             android:id="@+id/nav_gallery"
             android:icon="@drawable/webicon"
             android:title="WebView" />
+        <item
+            android:id="@+id/nav_musicPlayer"
+            android:icon="@drawable/baseline_audio_file_24"
+            android:title="MusicPlayer" />
     </group>
 </menu>
