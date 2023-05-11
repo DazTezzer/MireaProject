@@ -16,5 +16,17 @@
             android:id="@+id/nav_musicPlayer"
             android:icon="@drawable/baseline_audio_file_24"
             android:title="MusicPlayer" />
+        <item
+            android:id="@+id/nav_sensor"
+            android:icon="@drawable/baseline_navigation_24"
+            android:title="Sensor" />
+        <item
+            android:id="@+id/nav_photo"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Photo" />
+        <item
+            android:id="@+id/nav_record"
+            android:icon="@drawable/baseline_mic_24"
+            android:title="Record" />
     </group>
 </menu>

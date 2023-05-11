@@ -21,5 +21,20 @@
         android:name="ru.mirea.rulev.mireaproject.ui.musicplayer.MusicPlayer"
         android:label="MusicPlayer"
         tools:layout="@layout/fragment_music_player" />
+    <fragment
+        android:id="@+id/nav_sensor"
+        android:name="ru.mirea.rulev.mireaproject.Compass"
+        android:label="fragment_sensor"
+        tools:layout="@layout/fragment_sensor" />
+    <fragment
+        android:id="@+id/nav_photo"
+        android:name="ru.mirea.rulev.mireaproject.photo"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo" />
+    <fragment
+        android:id="@+id/nav_record"
+        android:name="ru.mirea.rulev.mireaproject.record"
+        android:label="fragment_record"
+        tools:layout="@layout/fragment_record" />
 
 </navigation>
