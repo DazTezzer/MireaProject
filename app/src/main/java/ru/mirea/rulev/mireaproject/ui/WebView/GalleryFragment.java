@@ -28,7 +28,7 @@ public class GalleryFragment extends Fragment {
         View root = binding.getRoot();
 
         WebView webview = binding.webview;
-        webview.loadUrl("https://vk.com/rulev_danila");
+        webview.loadUrl("https://github.com/DazTezzer");
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient());

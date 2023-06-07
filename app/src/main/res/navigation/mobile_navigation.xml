@@ -36,5 +36,20 @@
         android:name="ru.mirea.rulev.mireaproject.record"
         android:label="fragment_record"
         tools:layout="@layout/fragment_record" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="ru.mirea.rulev.mireaproject.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_fileInfo"
+        android:name="ru.mirea.rulev.mireaproject.FileInfo"
+        android:label="fragment_file_info"
+        tools:layout="@layout/fragment_file_info" />
+    <fragment
+        android:id="@+id/nav_net"
+        android:name="ru.mirea.rulev.mireaproject.Net"
+        android:label="fragment_net"
+        tools:layout="@layout/fragment_net" />
 
 </navigation>
