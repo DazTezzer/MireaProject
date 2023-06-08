@@ -40,5 +40,9 @@
             android:id="@+id/nav_net"
             android:icon="@drawable/baseline_newspaper_24"
             android:title="News" />
+        <item
+            android:id="@+id/nav_facility"
+            android:icon="@drawable/baseline_map_24"
+            android:title="Maps" />
     </group>
 </menu>
