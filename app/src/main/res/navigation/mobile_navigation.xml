@@ -56,5 +56,10 @@
         android:name="ru.mirea.rulev.mireaproject.Facility"
         android:label="fragment_facility"
         tools:layout="@layout/fragment_facility" />
+    <fragment
+        android:id="@+id/nav_allApps"
+        android:name="ru.mirea.rulev.mireaproject.AllApps"
+        android:label="fragment_all_apps"
+        tools:layout="@layout/fragment_all_apps" />
 
 </navigation>

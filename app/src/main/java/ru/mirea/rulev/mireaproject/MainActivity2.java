@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +27,10 @@ import android.os.Bundle;
 
 import ru.mirea.rulev.mireaproject.databinding.ActivityMain2Binding;
 import ru.mirea.rulev.mireaproject.databinding.ActivityMainBinding;
+
+import android.annotation.SuppressLint;
+import android.content.pm.PackageInfo;
+import java.util.List;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -36,6 +45,10 @@ public class MainActivity2 extends AppCompatActivity {
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
+
+        String id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        id = "Android id - " + id;
+        binding.idandroid.setText(id);
 
         binding.signin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +78,25 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
+    private boolean checkForAnyDesk() {
+        PackageManager packageManager = getPackageManager();
+        List<PackageInfo> installedPackages = packageManager.getInstalledPackages(0);
 
+        for (PackageInfo packageInfo : installedPackages) {
+            if (packageInfo.packageName.equals("com.anydesk.anydeskandroid")) {
+                Snackbar.make(findViewById(android.R.id.content), "Обнаруженно приложение anydesk которое может использоваться хакерами для кражи данных", Snackbar.LENGTH_LONG).show();
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        if(!checkForAnyDesk()){
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+            updateUI(currentUser);
+        }
     }
 
     // [END on_start_check_user]

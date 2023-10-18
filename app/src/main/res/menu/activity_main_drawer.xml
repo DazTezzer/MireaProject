@@ -44,5 +44,9 @@
             android:id="@+id/nav_facility"
             android:icon="@drawable/baseline_map_24"
             android:title="Maps" />
+        <item
+            android:id="@+id/nav_allApps"
+            android:title="Installed Apps"
+            android:icon="@drawable/baseline_apps_24"/>
     </group>
 </menu>
