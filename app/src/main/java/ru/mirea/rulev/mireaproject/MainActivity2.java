@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -84,7 +85,16 @@ public class MainActivity2 extends AppCompatActivity {
 
         for (PackageInfo packageInfo : installedPackages) {
             if (packageInfo.packageName.equals("com.anydesk.anydeskandroid")) {
+                binding.idandroid.setVisibility(View.INVISIBLE);
                 Snackbar.make(findViewById(android.R.id.content), "Обнаруженно приложение anydesk которое может использоваться хакерами для кражи данных", Snackbar.LENGTH_LONG).show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                },3000);
+                //
                 return true;
             }
         }
