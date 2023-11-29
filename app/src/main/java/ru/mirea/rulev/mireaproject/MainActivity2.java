@@ -161,7 +161,9 @@ public class MainActivity2 extends AppCompatActivity {
         byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         BigInteger bighash = new BigInteger(1, encodedhash);
         String hash_sha = bighash.toString(16);
-        mAuth.createUserWithEmailAndPassword(email, hash_sha)
+        Log.d("SHA256-actual", hash_sha.toString());
+        Sha256 sha = new Sha256(password);
+        mAuth.createUserWithEmailAndPassword(email, sha.ShaHash)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -194,7 +196,9 @@ public class MainActivity2 extends AppCompatActivity {
         byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         BigInteger bighash = new BigInteger(1, encodedhash);
         String hash_sha = bighash.toString(16);
-        mAuth.signInWithEmailAndPassword(email, password)
+        Log.d("SHA256-actual", hash_sha.toString());
+        Sha256 sha = new Sha256(password);
+        mAuth.signInWithEmailAndPassword(email, sha.ShaHash)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
