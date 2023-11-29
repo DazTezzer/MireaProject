@@ -23,6 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import android.os.Bundle;
 
@@ -54,7 +58,11 @@ public class MainActivity2 extends AppCompatActivity {
         binding.signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(binding.email.getText().toString(), binding.password.getText().toString());
+                try {
+                    signIn(binding.email.getText().toString(), binding.password.getText().toString());
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -68,7 +76,11 @@ public class MainActivity2 extends AppCompatActivity {
         binding.create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createAccount(binding.email.getText().toString(), binding.password.getText().toString());
+                try {
+                    createAccount(binding.email.getText().toString(), binding.password.getText().toString());
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -140,13 +152,16 @@ public class MainActivity2 extends AppCompatActivity {
         }
     }
 
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String password) throws NoSuchAlgorithmException {
         Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
-
-        mAuth.createUserWithEmailAndPassword(email, password)
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        BigInteger bighash = new BigInteger(1, encodedhash);
+        String hash_sha = bighash.toString(16);
+        mAuth.createUserWithEmailAndPassword(email, hash_sha)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -173,8 +188,12 @@ public class MainActivity2 extends AppCompatActivity {
         return !TextUtils.isEmpty(binding.email.getText().toString()) && android.util.Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches();
     }
 
-    private void signIn(String email, String password) {
+    private void signIn(String email, String password) throws NoSuchAlgorithmException {
         Log.d(TAG, "signIn:" + email);
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        BigInteger bighash = new BigInteger(1, encodedhash);
+        String hash_sha = bighash.toString(16);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
